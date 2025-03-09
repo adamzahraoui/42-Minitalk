@@ -6,7 +6,7 @@
 /*   By: adzahrao <adzahrao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 10:33:01 by adzahrao          #+#    #+#             */
-/*   Updated: 2025/03/09 07:35:25 by adzahrao         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:51:57 by adzahrao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc == 1)
 	{
-		ft_printf("%d\n", getpid());
+		ft_printf("PID : %d\n", getpid());
 		sa.sa_sigaction = print_characters;
 		sa.sa_flags = SA_SIGINFO;
 		sigaction(SIGUSR1, &sa, NULL);
