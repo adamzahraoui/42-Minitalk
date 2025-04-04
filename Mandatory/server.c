@@ -6,7 +6,7 @@
 /*   By: adzahrao <adzahrao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 10:33:01 by adzahrao          #+#    #+#             */
-/*   Updated: 2025/03/09 11:51:49 by adzahrao         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:46:30 by adzahrao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ void	print_characters(int sig, siginfo_t *info, void *con)
 
 int	main(int argc, char **argv)
 {
-	struct sigaction	sa;
+	struct sigaction	talk;
 
 	(void)argv;
 	if (argc == 1)
 	{
 		ft_printf("PID : %d\n", getpid());
-		sa.sa_sigaction = print_characters;
-		sa.sa_flags = SA_SIGINFO;
-		sigaction(SIGUSR1, &sa, NULL);
-		sigaction(SIGUSR2, &sa, NULL);
+		talk.sa_sigaction = print_characters;
+		talk.sa_flags = SA_SIGINFO;
+		sigemptyset(&talk.sa_mask);
+		sigaction(SIGUSR1, &talk, NULL);
+		sigaction(SIGUSR2, &talk, NULL);
 		while (1)
 			pause();
 	}

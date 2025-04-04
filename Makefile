@@ -28,18 +28,20 @@ BSOBJ= $(BSSRC:.c=.o)
 
 all: $(NAME) $(SNAME)
 
-%.o : %.c Mandatory/minitalk.h bonus/minitalk.h
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) Mandatory/minitalk.h
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(SNAME) : $(SOBJ)
+$(SNAME) : $(SOBJ) Mandatory/minitalk.h
 	@$(CC) $(CFLAGS) $(SOBJ) -o $(SNAME)
 
-bonus: $(BOBJ) $(BSOBJ)
-	@$(CC) $(CFLAGS) $(BOBJ) -o $(BNAME)
-	@$(CC) $(CFLAGS) $(BSOBJ) -o $(BSNAME)
+bonus: $(BNAME) $(BSNAME)
+	@touch bonus
+
+$(BNAME) : $(BOBJ) bonus/minitalk.h
+	$(CC) $(CFLAGS) $(BOBJ) -o $(BNAME)
+
+$(BSNAME) : $(BSOBJ) bonus/minitalk.h
+	$(CC) $(CFLAGS) $(BSOBJ) -o $(BSNAME)
 
 clean: 
 	@-rm -f $(OBJ) $(SOBJ) $(BOBJ) $(BSOBJ)
